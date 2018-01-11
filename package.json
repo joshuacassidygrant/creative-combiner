@@ -1,0 +1,15 @@
+{
+  "name": "creative-combiner",
+  "version": "0.0.1",
+  "description": "A creativity tool for combining and randomizing ideas.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "creativity",
+    "randomness"
+  ],
+  "author": "Joshua Cassidy Grant",
+  "license": "ISC"
+}
