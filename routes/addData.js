@@ -1,15 +1,25 @@
-var express = require('express');
-var router = express.Router();
-var fs = require('fs');
-var u = require('../utility/utility');
+const express = require('express');
+const router = express.Router();
+const fs = require('fs');
+const bodyParser = require('body-parser');
 
-var Card = require('../model/Card');
+const u = require('../utility/utility');
+const Card = require('../model/Card');
+
+var app = express();
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+
+
 
 //TODO: put this constant somewhere better
-const dataDir = "data";
+const fileDir = "test";
+const fileName = "testData.json";
+
 
 router.post('/', (req, res, next) => {
-  console.log("Query" + req.body.title);
+
   var title = req.body.title;
   var comments = req.body.comments;
   var category = req.body.category;
@@ -17,25 +27,28 @@ router.post('/', (req, res, next) => {
   var newCard = new Card(title, comments, category);
 
   addCardToJson(newCard);
-  next();
+  res.json(newCard);
+
 });
 
 var addCardToJson = (card) => {
-  if(!fs.existsSync(dataDir)){
-    fs.mkdirSync(dataDir);
-  }
 
-  var jsonData = JSON.parse(u.getJson());
-  console.log(jsonData);
-  jsonData.push(card);
-  console.log(jsonData);
+  u.getFileData(fileDir, fileName)
+  .then((data) => {
+    data.push(card);
+    dataString = JSON.stringify(data);
 
-  jsonData = JSON.stringify(jsonData);
+    var path = "./" + fileDir + '/' + fileName;
 
-  fs.writeFile(dataDir + "/data.json", jsonData, function(err){
-    if(err){
-      console.log(err);
-    }
+    fs.writeFile(path, dataString, function(err){
+      if(err){
+          console.log(err);
+
+      }
+    })
+  })
+  .catch((err) => {
+    console.log(err);
   })
 }
 

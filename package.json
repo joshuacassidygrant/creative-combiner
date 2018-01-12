@@ -4,12 +4,22 @@
   "description": "A creativity tool for combining and randomizing ideas.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js",
+    "test": "mocha"
   },
   "keywords": [
     "creativity",
     "randomness"
   ],
   "author": "Joshua Cassidy Grant",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.17.1",
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "pug": "^2.0.0-rc.4"
+  },
+  "devDependencies": {
+    "mocha": "^4.1.0"
+  }
 }

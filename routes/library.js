@@ -1,13 +1,18 @@
-var express = require('express');
-var router = express.Router();
-var u = require('../utility/utility')
+const express = require('express');
+const router = express.Router();
+const u = require('../utility/utility')
 
 const dataDir = "data";
+const dataFile = "data.json";
 
 router.get('/', (req, res, next) => {
-  var dataContent = u.getJson();
-  res.json(JSON.parse(dataContent));
-  next();
+  var dataContent = u.getFileData(dataDir, dataFile)
+  .then((data) => {
+    res.render('library.pug', data);
+  })
+  .catch((err) => {
+    console.log(err);
+  })
 });
 
 

@@ -1,14 +1,32 @@
 var fs = require('fs');
 
 
-const dataDir = "data";
-const dataFile = "data.json";
+var getFileData = (fileDir, fileName) => {
+  return new Promise((resolve, reject) => {
+    var path = "./" + fileDir + '/' + fileName;
+    fs.readFile(path, 'utf8', function (err, data) {
+      if (err) {
+        if(err.code === "ENOENT") {
+          fs.open(path, 'a+', function(){
+            var obj = [];
+            resolve(obj);
+          })
+        } else {
+          throw err;
+        }
+      } else {
+        if(data.length > 0){
+          var obj = JSON.parse(data);
+        } else{
+          var obj = [];
+        }
+        resolve(obj);
+      }
+    });
+  });
 
-var getJson = () => {
-  var dataContent = fs.readFileSync(dataDir + "/" + dataFile, "utf8");
-  return dataContent;
 }
 
 module.exports = {
-  getJson
+  getFileData
 }
