@@ -8,7 +8,9 @@ const dataFile = "data.json";
 router.get('/', (req, res, next) => {
   var dataContent = u.getFileData(dataDir, dataFile)
   .then((data) => {
-    res.render('library.pug', data);
+    res.render('library.pug', {
+      cards: data
+    });
   })
   .catch((err) => {
     console.log(err);

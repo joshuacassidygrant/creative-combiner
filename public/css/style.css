@@ -1,3 +1,10 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  font-size: 16px;
+}
+
 .container {
   max-width: 800px;
   margin: auto;
@@ -8,13 +15,62 @@ label {
 }
 
 
+.menuBar {
+  background-color: #555;
+  color: #fff;
+  position: fixed;
+  width: 100%;
+
+}
+
+.menuBar .item {
+    padding: 6px;
+    border: 1px solid #777;
+    display: inline-block;
+    text-transform: uppercase;
+    cursor: pointer;
+
+}
+
+.menuBar .item:first-of-type {
+  border-left-width: 2px;
+}
+
+/**MODULE*/
+.moduleHolder {
+  position: absolute;
+  top: 32px;
+  width: 360px;
+  background-color: #444;
+  border: 1px solid #777;
+  visibility: hidden;
+
+}
+
+.moduleHolder.activated {
+  visibility: visible;
+}
+
+
+
+.cardsView {
+  display: block;
+}
+
+.cardsView .card {
+  padding: 12px;
+  margin: 12px;
+  background-color: #ABC;
+  display: inline-flex;
+  width: 26%;
+}
+
+
 
 
 form#cardSubmit {
   padding: 24px;
-  background-color: #eee;
   border-radius: 12px;
-  width: 400px;
   margin: auto;
 }
 

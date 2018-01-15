@@ -1,12 +1,28 @@
 mixin header
   head
     script(src="https://unpkg.com/axios/dist/axios.min.js")
-    script(src="/js/cardUI.js" type="text/javascript")
+    script(src="/js/combiner.js" type="text/javascript")
     link(href="/css/style.css" rel="stylesheet" type="text/css")
 
 
+
+mixin cardsView(cards)
+  div.cardsView
+    each card in cards
+      +cardSingle(card)
+    else
+      p no cards found
+
+
+mixin cardSingle(card)
+  div.card
+    h3 #{card.title}
+    p #{card.comments}
+    p
+      em #{card.category}
+
 mixin addForm
-  form(method="POST" action="/addData" id="cardSubmit" onsubmit="submitForm('cardSubmit')")
+  form(method="POST" action="/addData" id="cardSubmit" onsubmit="submitForm('cardSubmit', 'addData')")
     div.formGroup
       label Card Title
       input(name="title" type="text")
@@ -18,3 +34,32 @@ mixin addForm
       input(name="category" type="text")
     div.formGroup
       input(type="submit" value="submit")
+
+mixin filterForm
+  p filters coming soon!
+
+mixin categoriesForm
+  p cats coming soon!
+
+mixin dataForm
+  p data coming soon!
+
+mixin menu()
+  div.menuBar
+    div.container
+      +menuModuleItem("Add", "addData")
+      +menuModuleItem("Filter", "filterData")
+      +menuModuleItem("Categories", "categorizeData")
+      +menuModuleItem("Data", "manageData")
+      div.moduleHolder(id="addData")
+        +addForm
+      div.moduleHolder(id="filterData")
+        +filterForm
+      div.moduleHolder(id="categorizeData")
+        +categoriesForm
+      div.moduleHolder(id="manageData")
+        +dataForm
+
+
+mixin menuModuleItem(name, id)
+  a.item(onclick='toggleModule(' + id + ')' ) #{name}

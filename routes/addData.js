@@ -7,19 +7,20 @@ const u = require('../utility/utility');
 const Card = require('../model/Card');
 
 var app = express();
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 
 
 
 //TODO: put this constant somewhere better
-const fileDir = "test";
-const fileName = "testData.json";
+const fileDir = "data";
+const fileName = "data.json";
 
 
 router.post('/', (req, res, next) => {
 
+  console.log(JSON.stringify(req.body));
   var title = req.body.title;
   var comments = req.body.comments;
   var category = req.body.category;
