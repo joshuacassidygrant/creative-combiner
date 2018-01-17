@@ -7,7 +7,7 @@ var getFileData = (fileDir, fileName) => {
     fs.readFile(path, 'utf8', function (err, data) {
       if (err) {
         if(err.code === "ENOENT") {
-          fs.open(path, 'a+', function(){
+          fs.open(path, 'wx', function(){
             var obj = [];
             resolve(obj);
           })
