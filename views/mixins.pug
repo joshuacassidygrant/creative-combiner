@@ -21,7 +21,7 @@ mixin cardSingle(card)
     p
       em #{card.category}
 
-mixin addForm
+mixin addForm(categories)
   form(method="POST" action="/addData" id="cardSubmit" onsubmit="submitForm('cardSubmit', 'addData')")
     div.formGroup
       label Card Title
@@ -31,7 +31,8 @@ mixin addForm
       input(name="comments" type="text")
     div.formGroup
       label Card Category
-      input(name="category" type="text")
+      select(name="category")
+        +outputCategoriesSelect(categories)
     div.formGroup
       input(type="submit" value="submit")
 
@@ -39,12 +40,17 @@ mixin filterForm
   p filters coming soon!
 
 mixin categoriesForm
-  p cats coming soon!
+  form(method="POST" action="/addCategory" id="catSubmit" onsubmit="submitForm('catSubmit', 'addCategory')")
+    div.formGroup
+      label Category Name
+      input(name="name" type="text")
+    div.formGroup
+      input(type="submit" value="submit")
 
 mixin dataForm
   p data coming soon!
 
-mixin menu()
+mixin menu(categories)
   div.menuBar
     div.container
       +menuModuleItem("Add", "addData")
@@ -52,7 +58,7 @@ mixin menu()
       +menuModuleItem("Categories", "categorizeData")
       +menuModuleItem("Data", "manageData")
       div.moduleHolder(id="addData")
-        +addForm
+        +addForm(categories)
       div.moduleHolder(id="filterData")
         +filterForm
       div.moduleHolder(id="categorizeData")
@@ -63,3 +69,7 @@ mixin menu()
 
 mixin menuModuleItem(name, id)
   a.item(onclick='toggleModule(' + id + ')' ) #{name}
+
+mixin outputCategoriesSelect(categories)
+  each category in categories
+    option(value= category.id style="color: " + category.colour) #{category.name}

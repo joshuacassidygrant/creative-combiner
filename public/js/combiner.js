@@ -35,7 +35,7 @@ var getFormData = (formId) => {
   for(i = 0; i < children.length; i++){
     if(children[i].classList && children[i].classList.contains('formGroup')){
       for(j = 0; j < children[i].childNodes.length; j++){
-        if(children[i].childNodes[j].nodeName === "INPUT") {
+        if(children[i].childNodes[j].nodeName === "INPUT" || children[i].childNodes[j].nodeName === "SELECT") {
           node = children[i].childNodes[j]
         }
       }
