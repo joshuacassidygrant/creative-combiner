@@ -47,8 +47,30 @@ function addCategory(name) {
   })
 }
 
+var attachCategoriesToCards = (cards, categories) => {
+  for(let i=0; i < cards.length; i++){
+    found = false;
+    j = 0;
+    while(j < categories.length && found == false) {
+      if(categories[j].id == cards[i].categoryId){
+        cards[i].category = categories[j];
+      }
+      j++;
+    }
+
+    if(!found){
+      console.log("No category found with id " + cards[i].categoryId );
+    }
+
+  }
+  return cards;
+}
+
+
+
 module.exports = {
-  addCategory
+  addCategory,
+  attachCategoriesToCards
 }
 
 /*function getCategories(data) {

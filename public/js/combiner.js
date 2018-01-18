@@ -1,15 +1,18 @@
 //UI
 
 var toggleModule = (module) => {
-  var modules = document.getElementsByClassName("moduleHolder");
-  for (var i = 0; i < modules.length; i++){
-    if(modules[i] != module){
-      modules[i].classList.remove("activated");
-    }
-  }
+  closeModules(module);
   module.classList.toggle("activated");
 }
 
+var closeModules = (exceptFor) => {
+  var modules = document.getElementsByClassName("moduleHolder");
+  for (var i = 0; i < modules.length; i++){
+    if(modules[i] != exceptFor){
+      modules[i].classList.remove("activated");
+    }
+  }
+}
 
 
 //DATA
@@ -70,4 +73,17 @@ var sendPostData = (data, url) => {
   };
 
   xhr.send(data);
+}
+
+//TODO:
+var downloadJSONdata() {
+  //getData
+  //makeFile
+  //
+}
+
+var uploadJSONData(){
+  //receive data
+  //validate
+  //parse
 }

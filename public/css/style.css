@@ -51,33 +51,74 @@ label {
   visibility: visible;
 }
 
+a.intermoduleLink {
+  cursor: pointer;
+  font-size: 13px;
+  margin-left: 4px;
+  padding: 4px;
+}
+
 
 
 .cardsView {
-  display: block;
+  display: flex;
+  flex-flow: row wrap;
 }
 
 .cardsView .card {
   padding: 12px;
   margin: 12px;
   background-color: #ABC;
-  display: inline-flex;
-  width: 26%;
+  display: block;
+  width: 27%;
+}
+
+.cardsView .card p{
+  width: 100%;
 }
 
 
 
-
-form#cardSubmit {
+form {
   padding: 24px;
   border-radius: 12px;
   margin: auto;
 }
 
-form#cardSubmit .formGroup {
+form .formGroup {
   margin-bottom: 12px;
 }
 
-form#cardSubmit .formGroup input{
+form .formGroup input{
   width: 100%;
+}
+
+form .formGroup .submitButton, form .closeButton {
+  border: 1px solid #fff;
+  color: #fff;
+  font-weight: thin;
+  font-size: 14px;
+  text-transform: uppercase;
+  background-color: transparent;
+  padding: 12px;
+  cursor: pointer;
+  transition: background-color 0.5s, color 0.5s;
+  width: 50%;
+  display: inline-block;
+  text-align: center;
+}
+
+form .closeButton {
+  margin-left: 12px;
+  width: calc(50% - 38px);
+}
+
+form .formGroup .submitButton:hover, form .closeButton:hover {
+  background-color: #111;
+  color: #ccc;
+}
+
+form select {
+  width: 60%;
+  padding: 2px;
 }

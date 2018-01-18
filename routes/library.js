@@ -10,8 +10,14 @@ const dataFile = "data.json";
 router.get('/', (req, res, next) => {
   var dataContent = Data.getFileData(dataDir, dataFile)
   .then((data) => {
+
+    var cards = Category.attachCategoriesToCards(data.cards, data.categories);
+
+    console.log(JSON.stringify(cards));
+
     res.render('library.pug', {
-      cards: data.cards,
+      cards: cards,
+      categories: data.categories,
       categories: data.categories,
       templates: data.templates
     });
