@@ -5,20 +5,20 @@ const bodyParser = require('body-parser');
 
 const u = require('../utility/utility');
 const Data = require('../model/Data');
-const Category = require('../model/Category');
+const Template = require('../model/Template');
 
 var app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 
-
 router.post('/', (req, res, next) => {
   console.log(JSON.stringify(req.body));
   var name = req.body.name;
-  var colour = req.body.colour;
-  var category = Category.addCategory(name, colour);
-  res.json(category);
+  var template = Template.newEmptyTemplate(name);
+  console.log(JSON.stringify(template));
+  Data.addTemplate(template);
+  res.json(template);
 
 });
 

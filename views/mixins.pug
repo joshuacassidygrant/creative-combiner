@@ -67,6 +67,15 @@ mixin filterForm(categories)
 mixin dataForm
   a(onclick="downloadJSONdata()") Download Data
 
+mixin newTemplateForm
+  form(method="POST" action="/addTemplate" id="addTemplate" onsubmit="submitForm('addTemplate', 'addTemplate')")
+    div.formGroup
+      label Template Name
+      input(type="text" name="name")
+    div.formGroup
+      input(class="submitButton" type="submit" value="submit")
+      a(class="closeButton" onclick="closeModules(null)") Cancel
+
 
 mixin menuLibrary(categories)
   div.menuBar

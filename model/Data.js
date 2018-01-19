@@ -56,7 +56,33 @@ var saveFileData = (data) => {
   })
 }
 
+var addTemplate = (template) => {
+  var data = getFileData()
+  .then((data) => {
+    var found = false;
+
+    for(let i = 0; i < data.templates.length; i++){
+      if(data.templates[i].name === template.name){
+        found = true;
+      }
+    }
+
+    if(!found){
+      data.templates.push(template);
+      saveFileData(data);
+      return template;
+    } else {
+      console.log("Template with given name already found");
+      return null;
+    }
+  })
+  .catch((err) =>{
+    console.log(err);
+  })
+}
+
 module.exports = {
   getFileData,
-  saveFileData
+  saveFileData,
+  addTemplate
 }

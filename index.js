@@ -26,12 +26,14 @@ app.listen(port, () => {
 var index = require('./routes/home');
 var addData = require('./routes/addData');
 var addCategory = require('./routes/addCategory');
+var addTemplate = require('./routes/addTemplate');
 var library = require('./routes/library');
 var templates = require('./routes/templates');
 
 app.use('/', index);
 app.use('/addData', addData);
 app.use('/addCategory', addCategory);
+app.use('/addTemplate', addTemplate);
 app.use('/library', library);
 app.use('/templates', templates);
 
