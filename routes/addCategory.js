@@ -22,7 +22,8 @@ const fileName = "data.json";
 router.post('/', (req, res, next) => {
   console.log(JSON.stringify(req.body));
   var name = req.body.name;
-  var category = Category.addCategory(name);
+  var colour = req.body.colour;
+  var category = Category.addCategory(name, colour);
   res.json(category);
 
 });

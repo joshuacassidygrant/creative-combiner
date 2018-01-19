@@ -18,7 +18,7 @@ mixin cardsView(cards)
 
 
 mixin cardSingle(card)
-  div.card
+  div.card(style="background-color: " + card.category.colour)
     h3 #{card.title}
     p #{card.comments}
     p
@@ -41,23 +41,24 @@ mixin addForm(categories)
       input(class="submitButton" type="submit" value="submit")
       a(class="closeButton" onclick="closeModules(null)") Cancel
 
-mixin filterForm
-  p filters coming soon!
-
 mixin categoriesForm
   form(method="POST" action="/addCategory" id="catSubmit" onsubmit="submitForm('catSubmit', 'addCategory')")
     div.formGroup
       label Category Name
       input(name="name" type="text")
     div.formGroup
+      label Category Colour
+      input(name="colour" type="color" value=defaultColour)
+    div.formGroup
       input(class="submitButton" type="submit" value="submit")
       a(class="closeButton" onclick="closeModules(null)") Cancel
 
 mixin filterForm(categories)
-  form
+  form(method="GET" action="")
     div.formGroup
       label Category Name
-      select(name="category")
+      select(name="cat")
+        option(value="") All
         +outputCategoriesSelect(categories)
     div.formGroup
       input(class="submitButton" type="submit" value="submit")
@@ -67,9 +68,10 @@ mixin dataForm
   a(onclick="downloadJSONdata()") Download Data
 
 
-mixin menu(categories)
+mixin menuLibrary(categories)
   div.menuBar
     div.container
+      +menuLinks
       +menuModuleItem("Add", "addData")
       +menuModuleItem("Filter", "filterData")
       +menuModuleItem("Categories", "categorizeData")
@@ -83,9 +85,26 @@ mixin menu(categories)
       div.moduleHolder(id="manageData")
         +dataForm
 
+mixin menuTemplates(categories)
+  div.menuBar
+    div.container
+      +menuLinks
+
+
+
+mixin menuLinks
+  +menuPageItem("?", "/home")
+  +menuPageItem("Library", "/library")
+  +menuPageItem("Templates", "/templates")
+  +menuPageItem("Combiner", "/combiner")
+  a.menuSeperator |
+
 
 mixin menuModuleItem(name, id)
   a.item(onclick='toggleModule(' + id + ')' ) #{name}
+
+mixin menuPageItem(name, href)
+  a.item(href=href class="link") #{name}
 
 mixin outputCategoriesSelect(categories)
   each category in categories
