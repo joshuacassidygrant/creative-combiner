@@ -118,3 +118,31 @@ mixin menuPageItem(name, href)
 mixin outputCategoriesSelect(categories)
   each category in categories
     option(value= category.id style="color: " + category.colour) #{category.name}
+
+mixin addTemplateComponentForm(categories)
+  form(id="addTemplateComponentForm" class="moduleHolder" method="POST" action="/addTemplateComponent" onsubmit="submitForm('addTemplateComponentForm', 'addTemplateComponent')")
+    div.formGroup
+      label Category to Add
+      select(name="category")
+        +outputCategoriesSelect(categories)
+    div.formGroup
+      input(type="hidden" name="templateName" value="-1")
+    div.formGroup
+      input(class="submitButton" type="submit" value="submit")
+      a(class="closeButton" onclick="closeModules(null)") Cancel
+
+mixin templatesList(templates)
+  div.templatesList
+    each template in templates
+      +template(template)
+
+mixin template(template)
+  div.template
+    h3 #{template.name}
+    div.templateComponents
+      div.templateComponent(style="background-color:#fff; color: #c22; border: 2px solid #c22;")
+        p Verb
+      div.templateComponent(style="background-color:#fff; color: #2cc; border: 2px solid #2cc;")
+        p Noun
+      div.templateComponent(onclick="openAddDialogue('" + template.name + "')" style="background-color:#fff; color: #444; border: 2px solid #444;")
+        h2 +

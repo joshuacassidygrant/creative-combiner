@@ -97,7 +97,34 @@ a.intermoduleLink {
 }
 
 
+/*Templates*/
 
+.templatesList .template {
+  background-color: #BBB;
+  padding: 24px;
+  margin-bottom: 12px;
+}
+
+.templatesList .template h3 {
+
+}
+
+.template .templateComponents {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.template .templateComponents .templateComponent {
+  height: 72px;
+  border-radius: 5px;
+  width: 72px;
+  margin: 12px;
+  text-align: center;
+
+}
+
+/*Forms*/
 form {
   padding: 24px;
   border-radius: 12px;

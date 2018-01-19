@@ -5,5 +5,7 @@ html
   body
     +menuTemplates(categories)
     div.container
-      p hi templates
       +newTemplateForm
+      +templatesList(templates)
+    div.floatingModuleContainer(id="addTemplateComponentHolder" class="moduleHolder")
+      +addTemplateComponentForm(categories)

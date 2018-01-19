@@ -14,6 +14,25 @@ var closeModules = (exceptFor) => {
   }
 }
 
+var openAddDialogue = (templateName) => {
+  closeModules();
+  addTemplateComponentForm = document.getElementById("addTemplateComponentForm");
+  setFieldValue(addTemplateComponentForm, "templateName", templateName);
+  addTemplateComponentForm.classList.toggle("activated");
+
+}
+
+var setFieldValue = (form, key, value) => {
+  form.childNodes.forEach((n) => {
+    if(n.classList.contains("formGroup")) {
+      n.childNodes.forEach((m) => {
+        if(m.getAttribute("name") == key) {
+          m.setAttribute("name", value);
+        }
+      })
+    }
+  })
+}
 
 //DATA
 
