@@ -51,6 +51,10 @@ label {
   line-height:1.8;
 }
 
+.undermenuSpace {
+  padding-bottom: 48px;
+}
+
 /**MODULE*/
 .moduleHolder {
   position: absolute;

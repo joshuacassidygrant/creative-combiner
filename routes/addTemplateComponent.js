@@ -15,12 +15,8 @@ app.use(bodyParser.json());
 router.post('/', (req, res, next) => {
   console.log(JSON.stringify(req.body));
   var templateName = req.body.templateName;
-  var categoryName = req.body.category;
-
-  //TODO finish this implementation
-
-  res.json(template);
-
+  var categoryId = req.body.category;
+  Data.addTemplateComponent(templateName, categoryId);
 });
 
 

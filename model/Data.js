@@ -1,4 +1,5 @@
-var fs = require('fs');
+const fs = require('fs');
+const Category = require('../model/Category');
 
 //TODO: put this constant somewhere better
 const fileDir = "data";
@@ -56,6 +57,35 @@ var saveFileData = (data) => {
   })
 }
 
+function addCategory(name, colour) {
+  var data = getFileData()
+  .then((data) => {
+    var nextId = 0;
+    var found = false;
+
+
+    for(let i = 0; i < data.categories.length; i++){
+      if(data.categories[i].name === name){
+        found = true;
+      }
+      nextId = Math.max(data.categories[i].id, nextId) + 1;
+    }
+
+    if(!found){
+      var category = new Category.Category(nextId, name, colour);
+      data.categories.push(category);
+      saveFileData(data);
+      return category;
+    } else {
+      console.log("Category with given name already found");
+      return null;
+    }
+  })
+  .catch((err) =>{
+    console.log(err);
+  })
+}
+
 var addTemplate = (template) => {
   var data = getFileData()
   .then((data) => {
@@ -81,8 +111,25 @@ var addTemplate = (template) => {
   })
 }
 
+var addTemplateComponent = (templateName, categoryId) => {
+  var data = getFileData()
+  .then((data) => {
+    data.templates.forEach((t) => {
+      if(t.name == templateName){
+        t.slots.push(categoryId);
+      }
+    })
+    saveFileData(data);
+  })
+  .catch((err) =>{
+    console.log(err);
+  })
+}
+
 module.exports = {
   getFileData,
   saveFileData,
-  addTemplate
+  addCategory,
+  addTemplate,
+  addTemplateComponent
 }

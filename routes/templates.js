@@ -19,10 +19,11 @@ const defaultColours = [
 router.get('/', (req, res, next) => {
   var dataContent = Data.getFileData(dataDir, dataFile)
   .then((data) => {
-    console.log(JSON.stringify(data.categories));
+    var templates = Category.attachCategoriesToTemplates(data.templates, data.categories);
+    console.log(JSON.stringify(templates));
     res.render('templates.pug', {
       categories: data.categories,
-      templates: data.templates
+      templates: templates
     });
   })
   .catch((err) => {

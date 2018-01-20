@@ -27,7 +27,7 @@ var setFieldValue = (form, key, value) => {
     if(n.classList.contains("formGroup")) {
       n.childNodes.forEach((m) => {
         if(m.getAttribute("name") == key) {
-          m.setAttribute("name", value);
+          m.setAttribute("value", value);
         }
       })
     }

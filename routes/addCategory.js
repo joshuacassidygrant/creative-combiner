@@ -17,7 +17,7 @@ router.post('/', (req, res, next) => {
   console.log(JSON.stringify(req.body));
   var name = req.body.name;
   var colour = req.body.colour;
-  var category = Category.addCategory(name, colour);
+  var category = Data.addCategory(name, colour);
   res.json(category);
 
 });

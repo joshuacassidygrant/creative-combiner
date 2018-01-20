@@ -7,34 +7,7 @@ function Category(id, name, colour){
   this.colour = colour;
 }
 
-function addCategory(name, colour) {
-  var data = Data.getFileData()
-  .then((data) => {
-    var nextId = 0;
-    var found = false;
 
-
-    for(let i = 0; i < data.categories.length; i++){
-      if(data.categories[i].name === name){
-        found = true;
-      }
-      nextId = Math.max(data.categories[i].id, nextId) + 1;
-    }
-
-    if(!found){
-      var category = new Category(nextId, name, colour);
-      data.categories.push(category);
-      Data.saveFileData(data);
-      return category;
-    } else {
-      console.log("Category with given name already found");
-      return null;
-    }
-  })
-  .catch((err) =>{
-    console.log(err);
-  })
-}
 
 var attachCategoriesToCards = (cards, categories) => {
   for(let i=0; i < cards.length; i++){
@@ -56,11 +29,26 @@ var attachCategoriesToCards = (cards, categories) => {
   return cards;
 }
 
+var attachCategoriesToTemplates = (templates, categories) => {
+  templates.forEach((t)=>{
+    t.slotsData = [];
+    t.slots.forEach((s)=> {
+      categories.forEach((c) => {
+        if(c.id == s) {
+          t.slotsData.push(c);
+        }
+      })
+    })
+  })
+  return templates;
+}
+
 
 
 module.exports = {
-  addCategory,
-  attachCategoriesToCards
+  Category,
+  attachCategoriesToCards,
+  attachCategoriesToTemplates
 }
 
 /*function getCategories(data) {

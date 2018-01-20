@@ -115,6 +115,9 @@ mixin menuModuleItem(name, id)
 mixin menuPageItem(name, href)
   a.item(href=href class="link") #{name}
 
+mixin undermenuSpace
+  div.undermenuSpace
+
 mixin outputCategoriesSelect(categories)
   each category in categories
     option(value= category.id style="color: " + category.colour) #{category.name}
@@ -139,10 +142,16 @@ mixin templatesList(templates)
 mixin template(template)
   div.template
     h3 #{template.name}
-    div.templateComponents
-      div.templateComponent(style="background-color:#fff; color: #c22; border: 2px solid #c22;")
-        p Verb
-      div.templateComponent(style="background-color:#fff; color: #2cc; border: 2px solid #2cc;")
-        p Noun
-      div.templateComponent(onclick="openAddDialogue('" + template.name + "')" style="background-color:#fff; color: #444; border: 2px solid #444;")
-        h2 +
+    +templateComponents(template)
+
+
+mixin templateComponents(template)
+  div.templateComponents
+    each slot in template.slotsData
+      +templateComponent(slot)
+    div.templateComponent(onclick="openAddDialogue('" + template.name + "')" style="background-color:#fff; color: #444; border: 2px solid #444;")
+      h2 +
+
+mixin templateComponent(slot)
+  div.templateComponent(style="background-color:#fff; color: " + slot.colour + "; border: 2px solid " + slot.colour + ";")
+    p #{slot.name}
