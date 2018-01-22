@@ -3,16 +3,8 @@ const router = express.Router();
 const u = require('../utility/utility');
 const Data = require('../model/data');
 const Category = require('../model/Category');
+const Card = require('../model/Card');
 
-
-
-const defaultColours = [
-  '#0E7C7B', //medblue
-  '#00487C', //dblue
-  '#B8B42D', //yellow
-  '#D62246', //magenta
-  '#37392E' //darkgray
-];
 
 
 router.get('/', (req, res, next) => {
@@ -21,35 +13,42 @@ router.get('/', (req, res, next) => {
 
     var cards = data.cards;
 
-    //console.log(JSON.stringify(cards));
-
-
     var cat = req.query.cat;
-    //console.log(cat);
     if(cat) {
       cards = cards.filter((c) => {return c.categoryId == cat})
     }
 
-    //console.log(JSON.stringify(cards));
-
-
     cards = Category.attachCategoriesToCards(cards, data.categories);
 
-    var defaultColour = defaultColours[Math.floor((Math.random() * defaultColours.length))];
 
+    var combination = combine(data.templates[0], cards)
+    console.log(JSON.stringify(combination));
 
-
-    res.render('library.pug', {
+    res.render('combiner.pug', {
       cards: cards,
       categories: data.categories,
       templates: data.templates,
-      defaultColour: defaultColour
+      combination: combination
     });
   })
   .catch((err) => {
     console.log(err);
   })
 });
+
+//REQUIRES: a full set of data and a chosen template
+//EFFECTS: produces an array of cards randomly chosen within the given category sequence in the template
+function combine(template, cards) {
+  var combination = [];
+
+  template.slots.forEach((s) => {
+    var cardsOfCategory = u.getCardsOfCategory(cards, s);
+    var card = cardsOfCategory[Math.floor((Math.random() * cards.length))];
+    combination.push(card);
+  });
+
+  return combination;
+}
 
 
 module.exports = router;

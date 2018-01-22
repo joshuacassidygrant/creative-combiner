@@ -99,6 +99,13 @@ mixin menuTemplates(categories)
     div.container
       +menuLinks
 
+mixin menuCombiner(templates)
+  div.menuBar
+    div.container
+      +menuLinks
+      +menuModuleItem("Template", "chooseTemplate")
+
+
 
 
 mixin menuLinks
@@ -155,3 +162,7 @@ mixin templateComponents(template)
 mixin templateComponent(slot)
   div.templateComponent(style="background-color:#fff; color: " + slot.colour + "; border: 2px solid " + slot.colour + ";")
     p #{slot.name}
+
+mixin combinationDisplay(combination)
+  each component in combination
+    p #{component.title}

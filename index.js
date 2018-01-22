@@ -30,6 +30,7 @@ var addTemplate = require('./routes/addTemplate');
 var addTemplateComponent = require('./routes/addTemplateComponent');
 var library = require('./routes/library');
 var templates = require('./routes/templates');
+var combiner = require('./routes/combiner');
 
 app.use('/', index);
 app.use('/addData', addData);
@@ -38,6 +39,7 @@ app.use('/addTemplate', addTemplate);
 app.use('/addTemplateComponent', addTemplateComponent);
 app.use('/library', library);
 app.use('/templates', templates);
+app.use('/combiner', combiner);
 
 
 
