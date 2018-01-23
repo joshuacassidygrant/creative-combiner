@@ -4,6 +4,7 @@ const u = require('../utility/utility');
 const Data = require('../model/data');
 const Category = require('../model/Category');
 const Card = require('../model/Card');
+const Template = require('../model/Template');
 
 
 
@@ -18,17 +19,17 @@ router.get('/', (req, res, next) => {
       cards = cards.filter((c) => {return c.categoryId == cat})
     }
 
+    var activeTemplate = Template.getActiveTemplate(data);
+    //TODO: handle no template chosen or empty template
     cards = Category.attachCategoriesToCards(cards, data.categories);
-
-
-    var combination = combine(data.templates[0], cards)
-    console.log(JSON.stringify(combination));
+    var combination = combine(activeTemplate, cards)
 
     res.render('combiner.pug', {
       cards: cards,
       categories: data.categories,
       templates: data.templates,
-      combination: combination
+      combination: combination,
+      activeTemplate: activeTemplate
     });
   })
   .catch((err) => {
@@ -43,7 +44,8 @@ function combine(template, cards) {
 
   template.slots.forEach((s) => {
     var cardsOfCategory = u.getCardsOfCategory(cards, s);
-    var card = cardsOfCategory[Math.floor((Math.random() * cards.length))];
+    //console.log("Cards from " + s + JSON.stringify(cardsOfCategory));
+    var card = cardsOfCategory[Math.floor((Math.random() * cardsOfCategory.length))];
     combination.push(card);
   });
 

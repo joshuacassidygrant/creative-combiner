@@ -6,17 +6,19 @@ const fileDir = "data";
 const fileName = "data.json";
 
 
-function Data(categories, cards, templates){
+function Data(categories, cards, templates, activeTemplateIndex){
     this.categories = categories;
     this.cards = cards;
     this.templates = templates;
+    this.activeTemplateIndex = activeTemplateIndex;
 }
 
 function getEmptyData(){
   categories = [],
   cards = [],
   templates = []
-  return new Data(categories, cards, templates);
+  activeTemplateIndex = -1;
+  return new Data(categories, cards, templates, activeTemplateIndex);
 }
 
 var getFileData = () => {
@@ -126,10 +128,22 @@ var addTemplateComponent = (templateName, categoryId) => {
   })
 }
 
+var changeActiveTemplate = (templateName) => {
+  var data = getFileData()
+  .then((data) => {
+    data.activeTemplate = templateName;
+    saveFileData(data);
+  })
+  .catch((err) =>{
+    console.log(err);
+  })
+}
+
 module.exports = {
   getFileData,
   saveFileData,
   addCategory,
   addTemplate,
-  addTemplateComponent
+  addTemplateComponent,
+  changeActiveTemplate
 }

@@ -76,6 +76,21 @@ mixin newTemplateForm
       input(class="submitButton" type="submit" value="submit")
       a(class="closeButton" onclick="closeModules(null)") Cancel
 
+mixin chooseTemplateForm(templates)
+  form(method="POST" action="/changeActiveTemplate" id="changeTemplate" onsubmit="submitForm('changeTemplate', 'changeActiveTemplate')")
+    div.formGroup
+      label Template
+      select(name="templateName")
+        +outputTemplatesSelect(templates)
+    div.formGroup
+      input(class="submitButton" type="submit" value="submit")
+      a(class="closeButton" onclick="closeModules(null)") Cancel
+
+mixin outputTemplatesSelect(templates)
+  each template in templates
+    option(value= template.name) #{template.name}
+
+
 
 mixin menuLibrary(categories)
   div.menuBar
@@ -104,9 +119,8 @@ mixin menuCombiner(templates)
     div.container
       +menuLinks
       +menuModuleItem("Template", "chooseTemplate")
-
-
-
+      div.moduleHolder(id="chooseTemplate")
+        +chooseTemplateForm(templates)
 
 mixin menuLinks
   +menuPageItem("?", "/home")

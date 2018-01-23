@@ -1,6 +1,7 @@
 //UI
 
 var toggleModule = (module) => {
+  console.log(module);
   closeModules(module);
   module.classList.toggle("activated");
 }

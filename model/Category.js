@@ -22,7 +22,7 @@ var attachCategoriesToCards = (cards, categories) => {
     }
 
     if(!found){
-      console.log("No category found with id " + cards[i].categoryId );
+      console.log("No category found with id " + cards[i].categoryId + " for card " + cards[i].title);
     }
 
   }
