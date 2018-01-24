@@ -123,7 +123,7 @@ mixin menuCombiner(templates)
         +chooseTemplateForm(templates)
 
 mixin menuLinks
-  +menuPageItem("?", "/home")
+  +menuPageItem("?", "/")
   +menuPageItem("Library", "/library")
   +menuPageItem("Templates", "/templates")
   +menuPageItem("Combiner", "/combiner")
@@ -178,5 +178,11 @@ mixin templateComponent(slot)
     p #{slot.name}
 
 mixin combinationDisplay(combination)
-  each component in combination
-    p #{component.title}
+  div.combinationDisplay
+    each component in combination
+      +combinationComponent(component)
+
+mixin combinationComponent(component)
+  div.combinationComponent(style="border-color:" + component.category.colour)
+    p.content #{component.title}
+    p.category #{component.category.name}
