@@ -13,7 +13,6 @@ app.use(bodyParser.json());
 
 
 router.post('/', (req, res, next) => {
-  console.log(JSON.stringify(req.body));
   var templateName = req.body.templateName;
   Data.changeActiveTemplate(templateName);
   res.json(templateName);

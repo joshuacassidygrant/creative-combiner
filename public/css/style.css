@@ -199,3 +199,7 @@ form select {
   font-size: 10px;
   font-style: italic;
 }
+
+h1.pageTitle {
+  padding-top: 48px;
+}

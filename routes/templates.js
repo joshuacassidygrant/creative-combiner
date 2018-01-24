@@ -20,7 +20,6 @@ router.get('/', (req, res, next) => {
   var dataContent = Data.getFileData(dataDir, dataFile)
   .then((data) => {
     var templates = Category.attachCategoriesToTemplates(data.templates, data.categories);
-    console.log(JSON.stringify(templates));
     res.render('templates.pug', {
       categories: data.categories,
       templates: templates
