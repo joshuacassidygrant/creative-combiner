@@ -113,6 +113,10 @@ mixin menuTemplates(categories)
   div.menuBar
     div.container
       +menuLinks
+      +menuModuleItem("New Template", "newTemplate")
+      div.moduleHolder(id="newTemplate")
+        +newTemplateForm
+
 
 mixin menuHome()
   div.menuBar
@@ -175,7 +179,7 @@ mixin templateComponents(template)
   div.templateComponents
     each slot in template.slotsData
       +templateComponent(slot)
-    div.templateComponent(onclick="openAddDialogue('" + template.name + "')" style="background-color:#fff; color: #444; border: 2px solid #444;")
+    div(onclick="openAddDialogue('" + template.name + "')" class="templateComponent addComponentButton" style="")
       h2 +
 
 mixin templateComponent(slot)

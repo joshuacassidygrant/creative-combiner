@@ -66,6 +66,15 @@ label {
 
 }
 
+.floatingModuleContainer .moduleHolder {
+  left: calc(50% - 180px);
+  top: 96px;
+}
+
+.floatingModuleContainer .moduleHolder label {
+  color: #fff;
+}
+
 .moduleHolder.activated {
   visibility: visible;
 }
@@ -128,6 +137,12 @@ a.intermoduleLink {
 
 }
 
+.templateComponent.addComponentButton{
+  background-color:#fff;
+  color: #444;
+  border: 2px solid #444;
+  cursor: pointer;
+}
 /*Forms*/
 form {
   padding: 24px;

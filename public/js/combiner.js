@@ -42,6 +42,7 @@ var submitForm = (formId, url) => {
     console.log(urlEncodedDataPairs);
     var urlEncodedData = urlEncodedDataPairs.join('&').replace(/%20/g, '+');
     sendPostData(urlEncodedData, url);
+    window.location.reload();
 }
 
 //REQUIRES: a valid form id
